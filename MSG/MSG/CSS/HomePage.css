@@ -1,0 +1,53 @@
+nav ul {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			
+		}
+
+		nav li {
+			padding-right: 20px;
+			flex-shrink: 0;
+
+		}
+
+		nav a {
+			text-decoration: none;
+			display: inline-block;
+			
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		a {
+			display: inline-block;
+
+		}
+
+		a img {
+			display: block;
+			height: auto;
+			max-width: 100%;
+		}
+		h2 {
+			text-align: center;
+			padding: 50px;
+		}
+
+		img {
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+		h3 {
+			text-align: center;
+		}
+.Book {
+	display: flex;
+	justify-content: center;
+}

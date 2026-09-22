@@ -1,6 +1,4 @@
-<?php 
-
-
+<?php
 ?>
 
 <!DOCTYPE html>
@@ -9,18 +7,15 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Montgomery Sporting Goods & Paintball - Airsoft, Paintball</title>
-	<link rel="icon" type="Image/png" href="Image/Logo.gif">
-	<link rel="stylesheet" href="CSS/HomePage.css">
-	
-	
-		
+	<link rel="icon" type="Image/png" href="Logo.gif">
+	<link rel="stylesheet" href="HomePage.css">
 </head>
 <body>
 	<header>
 		<nav>
 			<ul>
-				<li> <a href="MSG_HomePage.php"> 
-						<img src="/Websites/MSG/Image/Logo.gif" alt="logo" width="150" height="150">
+				<li> <a href="MSG_HomePage.php">
+						<img src="Logo.gif" alt="logo" width="150" height="150">
 					</a>
 				</li>
 				<li> <a href="MSG_HomePage.php">Home</a> </li>
@@ -33,22 +28,19 @@
 				<li> <a href="#FAQ">FAQ</a> </li>
 				<li> <a href="#Contact">Contact</a> </li>
 				<li> <a href="https://montgomery-sporting-goods-paintball.myshopify.com/"> Online Store</a></li>
+				<li> <a href="RefLogin.php">Referee Login</a> </li>
 			</ul>
-		
 		</nav>
 	</header>
 
-		
-  <h1>Montgomery Sporting Goods & Paintball - Airsoft, Paintball</h1>
+	<h1>Montgomery Sporting Goods & Paintball - Airsoft, Paintball</h1>
 
-<h2> Want to book a party?</h2>
-<h3> Click bleow</h3>
-<div class="Book"> 
-	<a href="Book.php"><img src="Image/Book3.png" ></a>
-</div>
-	  
-	
-	
+	<h2> Want to book a party?</h2>
+	<h3> Click below</h3>
+
+	<div class="Book">
+		<a href="Book.php"><img src="Book3.png"></a>
+	</div>
 
 </body>
 </html>

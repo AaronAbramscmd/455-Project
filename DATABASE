@@ -1,0 +1,209 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Sep 29, 2026 at 06:38 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `msg_paintball`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `equipment`
+--
+
+CREATE TABLE `equipment` (
+  `Equipment_ID` int(11) NOT NULL,
+  `Equipment_Name` varchar(100) NOT NULL,
+  `Category` varchar(50) NOT NULL,
+  `Total_Stock` int(11) NOT NULL,
+  `Checked_Out` int(11) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `equipment`
+--
+
+INSERT INTO `equipment` (`Equipment_ID`, `Equipment_Name`, `Category`, `Total_Stock`, `Checked_Out`) VALUES
+(1, 'Tippmann 98 Marker', 'Marker', 25, 0),
+(2, 'Empire E-Flex Mask', 'Mask', 30, 0),
+(3, '48/3000 Air Tank', 'Tank', 20, 0),
+(5, 'Pod Pack (4+3)', 'Pack', 18, 0),
+(6, 'Paintball Pods (100ct)', 'Pods', 40, 0),
+(7, 'Barrel Squeegee', 'Tool', 15, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `game`
+--
+
+CREATE TABLE `game` (
+  `Game_ID` int(11) NOT NULL,
+  `Game_Type` varchar(50) NOT NULL,
+  `Date` date NOT NULL,
+  `Time` time NOT NULL,
+  `Location` varchar(100) NOT NULL,
+  `Capacity` int(11) NOT NULL,
+  `Referee_ID` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `game`
+--
+
+INSERT INTO `game` (`Game_ID`, `Game_Type`, `Date`, `Time`, `Location`, `Capacity`, `Referee_ID`) VALUES
+(1, 'Paintball Birthday Party', '2026-10-11', '13:00:00', 'Field A', 10, 1),
+(2, 'Airsoft Party', '2026-10-12', '11:00:00', 'Field B', 14, NULL),
+(3, 'Gell Ball Party', '2026-10-18', '15:30:00', 'Field C', 8, NULL),
+(4, 'Paintball Birthday Party', '2026-10-19', '10:00:00', 'Field A', 12, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `player`
+--
+
+CREATE TABLE `player` (
+  `Player_ID` int(11) NOT NULL,
+  `First_Name` varchar(50) NOT NULL,
+  `Last_Name` varchar(50) NOT NULL,
+  `Player_Email` varchar(100) NOT NULL,
+  `Password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `referee`
+--
+
+CREATE TABLE `referee` (
+  `Referee_ID` int(11) NOT NULL,
+  `First_Name` varchar(50) NOT NULL,
+  `Last_Name` varchar(50) NOT NULL,
+  `Referee_Email` varchar(100) NOT NULL,
+  `Password` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `referee`
+--
+
+INSERT INTO `referee` (`Referee_ID`, `First_Name`, `Last_Name`, `Referee_Email`, `Password`) VALUES
+(1, 'Preston', 'Kese', 'preston@msgpaintball.com', '$2y$10$jiZWPSKOVNWCd5K6FLW3NuntkY4vR.tBmmn7D71Khl.YS1dr2jnXG');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reservations`
+--
+
+CREATE TABLE `reservations` (
+  `Reservation_ID` int(11) NOT NULL,
+  `Player_ID` int(11) NOT NULL,
+  `Status` varchar(30) DEFAULT NULL,
+  `Reserved_Date` date NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `equipment`
+--
+ALTER TABLE `equipment`
+  ADD PRIMARY KEY (`Equipment_ID`);
+
+--
+-- Indexes for table `game`
+--
+ALTER TABLE `game`
+  ADD PRIMARY KEY (`Game_ID`),
+  ADD KEY `Referee_ID` (`Referee_ID`);
+
+--
+-- Indexes for table `player`
+--
+ALTER TABLE `player`
+  ADD PRIMARY KEY (`Player_ID`),
+  ADD UNIQUE KEY `Player_Email` (`Player_Email`);
+
+--
+-- Indexes for table `referee`
+--
+ALTER TABLE `referee`
+  ADD PRIMARY KEY (`Referee_ID`),
+  ADD UNIQUE KEY `Referee_Email` (`Referee_Email`);
+
+--
+-- Indexes for table `reservations`
+--
+ALTER TABLE `reservations`
+  ADD PRIMARY KEY (`Reservation_ID`),
+  ADD KEY `Player_ID` (`Player_ID`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `equipment`
+--
+ALTER TABLE `equipment`
+  MODIFY `Equipment_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `game`
+--
+ALTER TABLE `game`
+  MODIFY `Game_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `player`
+--
+ALTER TABLE `player`
+  MODIFY `Player_ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `referee`
+--
+ALTER TABLE `referee`
+  MODIFY `Referee_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `reservations`
+--
+ALTER TABLE `reservations`
+  MODIFY `Reservation_ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `game`
+--
+ALTER TABLE `game`
+  ADD CONSTRAINT `game_ibfk_1` FOREIGN KEY (`Referee_ID`) REFERENCES `referee` (`Referee_ID`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

@@ -1,3 +1,9 @@
+header {
+	width: 100%;
+	background-color: #0d0d0d;
+	border-bottom: 3px solid #d00000;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+}
 nav ul {
 			list-style: none;
 			padding: 0;
@@ -17,7 +23,12 @@ nav ul {
 		nav a {
 			text-decoration: none;
 			display: inline-block;
+
 			
+		}
+
+		h1 {
+			text-align: center;
 		}
 
 		a {
@@ -30,16 +41,13 @@ nav ul {
 			height: auto;
 			max-width: 100%;
 		}
+	.Location\/hours {
+	background-color: #222222;
+	padding: 35px;
+	border-radius: 10px;
+	border-top: 5px solid #d00000;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+	}
 
-		img {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-		}
+	
 
-
-		.Shop {
-			display: flex;
-			flex-direction: column;
-			align-items:center;		
-		}

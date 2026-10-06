@@ -22,6 +22,7 @@ nav ul {
 
 		h1 {
 			text-align: center;
+			color: white;
 		}
 
 		a {
@@ -39,15 +40,42 @@ nav ul {
 			padding: 50px;
 		}
 
-		img {
-			display: block;
-			margin-left: auto;
-			margin-right: auto;
-		}
+		
 		h3 {
 			text-align: center;
 		}
-.Book {
-	display: flex;
-	justify-content: center;
-}
+	
+
+	.Book {
+		display: flex;
+		justify-content: center;
+		
+	}
+	
+	.sec2{
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		background-color: #0d0d0d
+
+	}
+
+	p {
+		color: white;
+	}
+	
+	section{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: ;
+		gap: 5em;
+	}
+	iframe{
+		border-radius: 2em;
+		margin-right: 50px;
+	}
+	body {
+		background-color: #0d0d0d	}

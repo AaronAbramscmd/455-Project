@@ -1,0 +1,146 @@
+nav ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+nav li {
+	padding-right: 20px;
+	flex-shrink: 0;
+}
+
+nav a {
+	text-decoration: none;
+	display: inline-block;
+	color: #222;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+nav a:hover {
+	color: #1a5fb4;
+}
+
+a img {
+	display: block;
+	height: auto;
+	max-width: 100%;
+}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #f2f2f2;
+	margin: 0;
+	padding-bottom: 60px;
+}
+
+h1 {
+	text-align: center;
+	letter-spacing: 1px;
+	margin-bottom: 5px;
+}
+
+h2 {
+	text-align: center;
+	margin-top: 45px;
+	color: #333;
+	border-bottom: 3px solid #1a5fb4;
+	width: 320px;
+	margin-left: auto;
+	margin-right: auto;
+	padding-bottom: 8px;
+}
+
+#MyParties {
+	border-bottom-color: #2e7d32;
+}
+
+.counter {
+	text-align: center;
+	color: #555;
+	font-size: 15px;
+}
+
+.notice {
+	width: 400px;
+	margin: 15px auto;
+	background-color: #e3f2fd;
+	border-left: 5px solid #1a5fb4;
+	padding: 12px;
+	color: #14406e;
+	text-align: center;
+}
+
+/* the row that holds all the party cards */
+.cardRow {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px;
+	padding: 15px 40px;
+}
+
+.partyCard {
+	width: 250px;
+	background-color: #ffffff;
+	border-left: 5px solid #1a5fb4;
+	border-radius: 6px;
+	box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+	padding: 16px;
+}
+
+.partyCard.mine {
+	border-left-color: #2e7d32;
+}
+
+.partyCard h3 {
+	margin-top: 0;
+	margin-bottom: 12px;
+	color: #1a5fb4;
+}
+
+.partyCard.mine h3 {
+	color: #2e7d32;
+}
+
+.partyCard p {
+	margin: 6px 0;
+	font-size: 14px;
+	color: #444;
+}
+
+.label {
+	font-weight: bold;
+	color: #222;
+}
+
+.partyCard button {
+	width: 100%;
+	margin-top: 12px;
+	padding: 10px;
+	background-color: #1a5fb4;
+	color: #ffffff;
+	border: none;
+	border-radius: 4px;
+	font-size: 14px;
+	cursor: pointer;
+}
+
+.partyCard button:hover {
+	background-color: #14406e;
+}
+
+.claimed {
+	margin-top: 12px;
+	text-align: center;
+	font-weight: bold;
+	color: #2e7d32;
+}
+
+.empty {
+	text-align: center;
+	color: #777;
+	font-style: italic;
+}

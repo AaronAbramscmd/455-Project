@@ -1,12 +1,14 @@
 <?php
 
+
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Airsoft Birthday Party</title>
+	<title>Gell Parties</title>
 	<link rel="icon" type="Image/png" href="Image/Logo.gif">
 	<link rel="stylesheet" href="CSS/Nav.css">
 	<style>
@@ -27,7 +29,7 @@
 				<li> <a href="PricesPage.php">Prices</a> </li>
 				<li> <a href="PBirthdayPage.php">Paintball Birthday Parties</a> </li>
 				<li> <a href="ABirthdayPage.php">Airsoft Birthday Parties</a> </li>
-				<li> <a href="GellPage.php">Gell Ball Parties</a> </li>
+				<li> <a href="GellPage.php">Gel Ball Parties</a> </li>
 				<li> <a href="FAQPage.php">FAQ</a> </li>
 				<li> <a href="ContactPage.php">Contact</a> </li>
 				<li> <a href="https://montgomery-sporting-goods-paintball.myshopify.com/"> Online Store</a></li>
@@ -36,29 +38,25 @@
 		</nav>
 	</header>
 
-	<h1>Airsoft Birthday Parties</h1>
-	<h4>For ages 12 & up</h4>
-	<h4>3 hour party</h4>
-	<h4>Private group & Private referee</h4>
+	<h1>Gel Ball Parties</h1>
+	<h4>Ultra low impact</h4>
+	<h4>For ages 6-11 years old</h4>
+	<h4>1.5 hour party</h4>
+	<p>*Reservation and $100 deposit required</p>
+	<p>Gel ball parties available April 1st - October 31st</p>
 
-	<h3>Package #1: - Up to 10 players - $329 plux tax</h3>
+	<p>Package #1: Up to 8 players $229 plus tax</p>
+	<p>Package #2: Up to 9-12 players $329 plus tax</p>
+	<p>Package #3: Up to 13-15 players $429 plus tax</p>
 
-	<p>Includes: Admission, rental gun, face masks, 15,000 BB's</p>
+	<p>(15 player is the maximum party size)</p>
 
-	<h3>Package #2: - 11-15 players - $399 plus tax</h3>
-
-	<p>Includes: Admission, rental gun, face mask, 25,000 BB's</p>
-
-	<p>** Minimum age for airsoft is 12 years old** <br> NO EXCEPTIONS</p>
-
-	<h3>Book your airsoft birthday party online today!</h3>
-
-	<p>Airsoft parties can't be played in rain or snow</p>
+	<h3>Each gel ball package includes:</h3>
+	<p>Admissions, gel ball guns, masks, chest protectors,<br> unlimited ammo, private games, and referee</p>
 
 	<a href="book.php">
-		<button type="submit" name="airsoft">Book Now!</button>
+		<button type="submit" name="submit">Book a gel party </button>
 	</a>
-
 
 </body>
 </html>

@@ -4,6 +4,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>FAQ</title>
+    <link rel="icon" type="Image/png" href="Image/Logo.gif">
 	<link rel="stylesheet" href="CSS/Nav.css">
 	<style>
 		

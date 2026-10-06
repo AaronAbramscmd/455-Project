@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Referee Login | MSG Paintball</title>
 	<link rel="icon" type="Image/png" href="Logo.gif">
-	<link rel="stylesheet" href="RefLogin.css">
+	<link rel="stylesheet" href="CSS/RefLogin.css">
 </head>
 <body>
 

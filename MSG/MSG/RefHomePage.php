@@ -64,7 +64,7 @@ $myCount = $mineResult->num_rows;
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Referee Home | MSG Paintball</title>
 	<link rel="icon" type="Image/png" href="Logo.gif">
-	<link rel="stylesheet" href="RefHomePage.css">
+	<link rel="stylesheet" href="CSS/RefHomePage.css">
 </head>
 <body>
 

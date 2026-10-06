@@ -1,15 +1,21 @@
 <?php
 
+
 ?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Airsoft Birthday Party</title>
-	<link rel="icon" type="Image/png" href="Image/Logo.gif">
+	<title>Contacts</title>
 	<link rel="stylesheet" href="CSS/Nav.css">
 	<style>
+		form{
+			display: grid;
+			place-items: center;
+		}
 		
 	</style>
 </head>
@@ -36,29 +42,24 @@
 		</nav>
 	</header>
 
-	<h1>Airsoft Birthday Parties</h1>
-	<h4>For ages 12 & up</h4>
-	<h4>3 hour party</h4>
-	<h4>Private group & Private referee</h4>
+	<form>
 
-	<h3>Package #1: - Up to 10 players - $329 plux tax</h3>
+		<label>Enter Name:</label><br>
+		<input type="text" name="name" placeholder="Enter your name"><br>
 
-	<p>Includes: Admission, rental gun, face masks, 15,000 BB's</p>
+		<label>Email:</label><br>
+		<input type="Email" name="gmail" placeholder="Enter email address"><br>
 
-	<h3>Package #2: - 11-15 players - $399 plus tax</h3>
+		<label>Subject:</label><br>
+		<input type="text" name="subject" placeholder="Enter text here"><br>
 
-	<p>Includes: Admission, rental gun, face mask, 25,000 BB's</p>
+		<label>Notes:</label><br>
+		<input type="text" name="notes" placeholder="Anything you would like to say?"><br>
 
-	<p>** Minimum age for airsoft is 12 years old** <br> NO EXCEPTIONS</p>
+		<button type="submit" name="ContactPage">Submit </button>
 
-	<h3>Book your airsoft birthday party online today!</h3>
 
-	<p>Airsoft parties can't be played in rain or snow</p>
-
-	<a href="book.php">
-		<button type="submit" name="airsoft">Book Now!</button>
-	</a>
-
+	</form>
 
 </body>
 </html>

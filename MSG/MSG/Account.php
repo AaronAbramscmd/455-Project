@@ -1,22 +1,20 @@
-<?php  
+<?php 
+
 
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Booking Page</title>
+	<title>Account Page</title>
 	<link rel="stylesheet" href="CSS/Nav.css">
 	<style>
 		header{
 		background-color: #0d0d0d;
 		border-bottom: 3px solid #d00000;
 		box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
-	}
-	</style>
-
+	}</style>
 </head>
 <body>
 	<header>
@@ -40,7 +38,6 @@
 		
 		</nav>
 	</header>
-
 
 </body>
 </html>

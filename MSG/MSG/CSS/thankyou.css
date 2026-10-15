@@ -1,0 +1,38 @@
+body {
+	background-color: #0d0d0d;
+}
+	
+.page {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	border: 2px solid #d00000;
+	border-radius: 60px;
+	margin: 100px;
+	padding-bottom: 20px;
+	background-color: #222222;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+
+}
+
+.button {
+	margin: 0px auto;
+	text-decoration: none;
+	padding: 15px 50px;
+	border-radius: 6px;
+	box-shadow: none;
+	background-color: #d00000;
+}
+
+.button a {
+	text-decoration: none;
+	font-size: 20px;
+}
+
+
+h1, h3, p {
+	text-align: center;
+	color: white;
+
+}

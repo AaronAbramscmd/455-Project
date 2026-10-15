@@ -1,4 +1,37 @@
+<?php
+session_start();
+include 'db.php';
 
+$errorMsg = "";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = trim($_POST['username']);
+    $firstName = trim($_POST['first_name']);
+    $lastName = trim($_POST['last_name']);
+    $email = trim($_POST['email']);
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirm_password'];
+
+    if ($password !== $confirmPassword) {
+        $errorMsg = "Passwords do not match.";
+    } else {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO player (Username, First_Name, Last_Name, Player_Email, Password)
+                VALUES (?, ?, ?, ?, ?)";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("sssss", $username, $firstName, $lastName, $email, $hashedPassword);
+
+        if ($stmt->execute()) {
+            $errorMsg = "Account created successfully!";
+        } else {
+            $errorMsg = "Error creating account. That username or email may already be in use.";
+        }
+        $stmt->close();
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 
@@ -234,7 +267,11 @@
 <div class="registerBox">
 
     <h2>Player Registration</h2>
-
+<?php
+if ($errorMsg != "") {
+    echo "<p>" . htmlspecialchars($errorMsg) . "</p>";
+}
+?>
 
     <form action="Register.php" method="POST">
 

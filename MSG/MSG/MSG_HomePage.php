@@ -15,40 +15,42 @@ session_start();
 
 	<style>
 	
-	section{
+	section {
 		padding-left: 15px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: ;
 		gap: 15em;
 	}
 
-	iframe{
+	iframe {
 		border-radius: 3em;
 	}
 
-	header{
+	header {
 		background-color: #0d0d0d;
 		border-bottom: 3px solid #d00000;
 		box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
 	}
 
-	h1, h2, h3{
+	h1, h2, h3 {
 		color: white;
 	}
 
-	.logoutButton {
-		background-color: #b00000;
+	.accountButton {
+		background-color: #222;
 		color: white;
 		padding: 10px 15px;
 		border-radius: 5px;
 		text-decoration: none;
 		font-weight: bold;
+		border: 1px solid #b00000;
+		white-space: nowrap;
 	}
 
-	.logoutButton:hover {
-		background-color: #d00000;
+	.accountButton:hover {
+		background-color: #b00000;
+		color: white;
 	}
 
 	</style>
@@ -111,7 +113,6 @@ session_start();
 					</a>
 				</li>
 
-
 				<?php
 
 				if (isset($_SESSION['player_id'])) {
@@ -119,7 +120,13 @@ session_start();
 				?>
 
 					<li>
-						<a class="logoutButton" href="logout.php">Logout</a>
+						<a class="accountButton" href="Account.php">
+							<?php
+							echo htmlspecialchars(
+								$_SESSION['player_first'] . ' ' . $_SESSION['player_last']
+							);
+							?>
+						</a>
 					</li>
 
 				<?php
@@ -152,15 +159,13 @@ session_start();
 
 	<h3>Click below</h3>
 
-
 	<div class="Book"> 
 
 		<a href="Book.php">
-			<img src="Image/Book5.png" width="750" height="auto">
+			<img src="Image/Book5.png" width="750" height="auto" alt="Book a party">
 		</a>
 
 	</div>
-
 
 	<div class="sec2">
 
@@ -191,8 +196,8 @@ session_start();
 
 	</div>
 
-
 	<script src="weather.js"></script>  
 
 </body>
 </html>
+

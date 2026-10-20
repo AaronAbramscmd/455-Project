@@ -1,14 +1,46 @@
-<?php
 
+<?php
 session_start();
 include 'db.php';
 
-if (!isset($_SESSION['player_id'])) {
+if (!isset($_SESSION['player_id']) || (int)$_SESSION['player_id'] <= 0) {
     header("Location: MSG_Login.php");
     exit();
 }
 
-$playerID = $_SESSION['player_id'];
+$playerID = (int)$_SESSION['player_id'];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cancel_booking'])) {
+
+    $gameID = filter_input(INPUT_POST, 'game_id', FILTER_VALIDATE_INT);
+
+    if ($gameID && $gameID > 0) {
+
+        $sql = "DELETE FROM game
+                WHERE Game_ID = ? AND Player_ID = ?";
+
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("ii", $gameID, $playerID);
+        $stmt->execute();
+
+        if ($stmt->affected_rows > 0) {
+            $_SESSION['booking_message'] = "Your reservation has been cancelled successfully.";
+        } else {
+            $_SESSION['booking_message'] = "Reservation not found. It may already have been cancelled.";
+        }
+
+        $stmt->close();
+
+    } else {
+        $_SESSION['booking_message'] = "Invalid reservation.";
+    }
+
+    header("Location: Account.php");
+    exit();
+}
+
+$message = $_SESSION['booking_message'] ?? '';
+unset($_SESSION['booking_message']);
 
 $sql = "SELECT Player_ID, First_Name, Last_Name, Player_Email
         FROM player
@@ -23,192 +55,288 @@ $player = $result->fetch_assoc();
 
 $stmt->close();
 
+$sql = "SELECT Game_ID, Game_Type, `Date`, `Time`, Location
+        FROM game
+        WHERE Player_ID = ?
+        ORDER BY `Date` ASC, `Time` ASC";
+
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $playerID);
+$stmt->execute();
+
+$reservations = $stmt->get_result();
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Account Page</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<link rel="stylesheet" href="CSS/Nav.css">
+    <title>Account Page | MSG Paintball</title>
 
-	<style>
+    <link rel="icon" type="image/gif" href="Image/Logo.gif">
+    <link rel="stylesheet" href="CSS/Nav.css">
 
-		header{
-			background-color: #0d0d0d;
-			border-bottom: 3px solid #d00000;
-			box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
-		}
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-		.account {
-			width: 600px;
-			max-width: 90%;
-			margin: 50px auto;
-			background-color: white;
-			color: black;
-			padding: 30px;
-			border-radius: 15px;
-			box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-		}
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #111;
+            color: white;
+        }
 
-		.account h1 {
-			text-align: center;
-			color: #b00000;
-		}
+        header {
+            background-color: #0d0d0d;
+            border-bottom: 3px solid #d00000;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.6);
+        }
 
-		.accountInfo {
-			font-size: 18px;
-			margin-top: 25px;
-		}
+        .account {
+            width: 600px;
+            max-width: 90%;
+            margin: 50px auto;
+            background-color: #1b1b1b;
+            padding: 30px;
+            border: 1px solid #d00000;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
 
-		.accountInfo p {
-			padding: 12px;
-			border-bottom: 1px solid #ccc;
-		}
+        .account h1 {
+            text-align: center;
+            color: white;
+        }
 
-		.accountButtons {
-			text-align: center;
-			margin-top: 30px;
-		}
+        .accountInfo {
+            font-size: 18px;
+            margin-top: 25px;
+        }
 
-		.accountButtons a {
-			display: inline-block;
-			background-color: #b00000;
-			color: white;
-			padding: 12px 20px;
-			margin: 5px;
-			border-radius: 5px;
-			text-decoration: none;
-			font-weight: bold;
-		}
+        .accountInfo p {
+            padding: 12px;
+            border-bottom: 1px solid #444;
+            overflow-wrap: anywhere;
+        }
 
-		.accountButtons a:hover {
-			background-color: #d00000;
-		}
+        .accountButtons {
+            text-align: center;
+            margin-top: 30px;
+        }
 
-		.reservations {
-			width: 900px;
-			max-width: 90%;
-			margin: 30px auto;
-			background-color: white;
-			color: black;
-			padding: 30px;
-			border-radius: 15px;
-			box-shadow: 0 5px 20px rgba(0,0,0,0.5);
-		}
+        .accountButtons a,
+        .cancelButton {
+            display: inline-block;
+            background-color: #b00000;
+            color: white;
+            padding: 12px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            cursor: pointer;
+        }
 
-		.reservations h2 {
-			color: #b00000;
-			text-align: center;
-		}
+        .accountButtons a:hover,
+        .cancelButton:hover {
+            background-color: #d00000;
+        }
 
-	</style>
+        .reservations {
+            width: 900px;
+            max-width: 90%;
+            margin: 30px auto 50px;
+            background-color: #1b1b1b;
+            padding: 30px;
+            border: 1px solid #d00000;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .reservations h2 {
+            text-align: center;
+            color: white;
+        }
+
+        .reservationCard {
+            background-color: #111;
+            border: 1px solid #444;
+            border-left: 4px solid #d00000;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .reservationCard h3 {
+            color: white;
+        }
+
+        .reservationCard p {
+            line-height: 1.6;
+            overflow-wrap: anywhere;
+        }
+
+        .message {
+            text-align: center;
+            background-color: #333;
+            border-left: 4px solid #d00000;
+            padding: 12px;
+            border-radius: 5px;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .account,
+            .reservations {
+                padding: 18px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-	<header>
-		<nav>
-			<ul>
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="MSG_HomePage.php">
+                    <img src="/Websites/MSG/Image/Logo2.gif"
+                         alt="logo" width="150" height="150">
+                </a>
+            </li>
 
-				<li>
-					<a href="MSG_HomePage.php"> 
-						<img src="/Websites/MSG/Image/Logo2.gif" alt="logo" width="150" height="150">
-					</a>
-				</li>
+            <li><a href="MSG_HomePage.php">Home</a></li>
+            <li><a href="HoursLocations.php">Hours/Locations</a></li>
+            <li><a href="FieldPage.php">Paintball Field</a></li>
+            <li><a href="PricesPage.php">Prices</a></li>
+            <li><a href="PBirthdayPage.php">Paintball Birthday Parties</a></li>
+            <li><a href="ABirthdayPage.php">Airsoft Birthday Parties</a></li>
+            <li><a href="GellPage.php">Gell Ball Parties</a></li>
+            <li><a href="FAQPage.php">FAQ</a></li>
+            <li><a href="ContactPage.php">Contact</a></li>
 
-				<li>
-					<a href="MSG_HomePage.php">Home</a>
-				</li>
+            <li>
+                <a href="https://montgomery-sporting-goods-paintball.myshopify.com/">
+                    Online Store
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
 
-				<li>
-					<a href="HoursLocations.php">Hours/Locations</a>
-				</li>
+<div class="account">
 
-				<li>
-					<a href="FieldPage.php">Paintball Field</a>
-				</li>
+    <h1>My Account</h1>
 
-				<li>
-					<a href="PricesPage.php">Prices</a>
-				</li>
+    <div class="accountInfo">
 
-				<li>
-					<a href="PBirthdayPage.php">Paintball Birthday Parties</a>
-				</li>
+        <p>
+            <strong>First Name:</strong>
+            <?php echo htmlspecialchars($player['First_Name'] ?? ''); ?>
+        </p>
 
-				<li>
-					<a href="ABirthdayPage.php">Airsoft Birthday Parties</a>
-				</li>
+        <p>
+            <strong>Last Name:</strong>
+            <?php echo htmlspecialchars($player['Last_Name'] ?? ''); ?>
+        </p>
 
-				<li>
-					<a href="GellPage.php">Gell Ball Parties</a>
-				</li>
+        <p>
+            <strong>Email:</strong>
+            <?php echo htmlspecialchars($player['Player_Email'] ?? ''); ?>
+        </p>
 
-				<li>
-					<a href="FAQPage.php">FAQ</a>
-				</li>
+    </div>
 
-				<li>
-					<a href="ContactPage.php">Contact</a>
-				</li>
+    <div class="accountButtons">
+        <a href="MSG_HomePage.php">Back to Home</a>
+        <a href="logout.php">Logout</a>
+    </div>
 
-				<li>
-					<a href="https://montgomery-sporting-goods-paintball.myshopify.com/">
-						Online Store
-					</a>
-				</li>
+</div>
 
-			</ul>
-		</nav>
-	</header>
+<div class="reservations">
 
+    <h2>My Reservations</h2>
 
-	<div class="account">
+    <?php if ($message !== ''): ?>
+        <p class="message">
+            <?php echo htmlspecialchars($message); ?>
+        </p>
+    <?php endif; ?>
 
-		<h1>My Account</h1>
+    <?php if ($reservations->num_rows > 0): ?>
 
-		<div class="accountInfo">
+        <?php while ($booking = $reservations->fetch_assoc()): ?>
 
-			<p>
-				<strong>First Name:</strong>
-				<?php echo htmlspecialchars($player['First_Name']); ?>
-			</p>
+            <div class="reservationCard">
 
-			<p>
-				<strong>Last Name:</strong>
-				<?php echo htmlspecialchars($player['Last_Name']); ?>
-			</p>
+                <h3>
+                    <?php echo htmlspecialchars($booking['Game_Type']); ?>
+                </h3>
 
-			<p>
-				<strong>Email:</strong>
-				<?php echo htmlspecialchars($player['Player_Email']); ?>
-			</p>
+                <p>
+                    <strong>Date:</strong>
+                    <?php
+                    echo htmlspecialchars(
+                        date('F j, Y', strtotime($booking['Date']))
+                    );
+                    ?>
+                </p>
 
-		</div>
+                <p>
+                    <strong>Time:</strong>
+                    <?php echo htmlspecialchars($booking['Time']); ?>
+                </p>
 
-		<div class="accountButtons">
+                <p>
+                    <strong>Field:</strong>
+                    <?php echo htmlspecialchars($booking['Location']); ?>
+                </p>
 
-			<a href="MSG_HomePage.php">Back to Home</a>
+                <form method="POST"
+                      action="Account.php"
+                      onsubmit="return confirm('Are you sure you want to cancel this reservation?');">
 
-			<a href="logout.php">Logout</a>
+                    <input type="hidden"
+                           name="game_id"
+                           value="<?php echo (int)$booking['Game_ID']; ?>">
 
-		</div>
+                    <button type="submit"
+                            name="cancel_booking"
+                            class="cancelButton">
+                        Cancel Reservation
+                    </button>
 
-	</div>
+                </form>
 
+            </div>
 
-	<div class="reservations">
+        <?php endwhile; ?>
 
-		<h2>My Reservations</h2>
+    <?php else: ?>
 
-		<p style="text-align: center;">
-			Your reservations will appear here.
-		</p>
+        <p class="empty">
+            You currently have no reservations.
+        </p>
 
-	</div>
+    <?php endif; ?>
+
+</div>
+
+<?php
+$stmt->close();
+$conn->close();
+?>
 
 </body>
 </html>

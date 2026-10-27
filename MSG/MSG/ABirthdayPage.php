@@ -1,25 +1,25 @@
 <?php
-
+session_start();
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Airsoft Birthday Party</title>
-	<link rel="icon" type="Image/png" href="Image/Logo.gif">
-	<link rel="stylesheet" href="CSS/Nav.css">
-	<style>
-		
-	</style>
+	<title>Airsoft Birthday Parties | MSG Paintball</title>
+	<link rel="icon" type="Image/png" href="Logo.gif">
+	<link rel="stylesheet" href="ABirthdayPage.css">
 </head>
 <body>
+
 	<header>
 		<nav>
 			<ul>
-				<li> <a href="MSG_HomePage.php"> 
-						<img src="/Websites/MSG/Image/Logo.gif" alt="logo" width="150" height="150">
-					</a>
+				<li> 
+					<a href="MSG_HomePage.php"> 
+						<img src="Logo.gif" alt="logo"> 
+					</a> 
 				</li>
 				<li> <a href="MSG_HomePage.php">Home</a> </li>
 				<li> <a href="HoursLocations.php">Hours/Locations</a> </li>
@@ -30,35 +30,52 @@
 				<li> <a href="GellPage.php">Gell Ball Parties</a> </li>
 				<li> <a href="FAQPage.php">FAQ</a> </li>
 				<li> <a href="ContactPage.php">Contact</a> </li>
-				<li> <a href="https://montgomery-sporting-goods-paintball.myshopify.com/"> Online Store</a></li>
+				<li> <a href="Reviews.php">Reviews</a> </li>
+				<li> <a href="https://montgomery-sporting-goods-paintball.myshopify.com/">Online Store</a> </li>
+				<li> <a href="RefRegister.php">Referee Register</a> </li>
+				<li> <a href="RefLogin.php">Referee Login</a> </li>
+				<li> <a href="MSG_Login.php">Player Login</a> </li>
 			</ul>
-		
 		</nav>
 	</header>
 
-	<h1>Airsoft Birthday Parties</h1>
-	<h4>For ages 12 & up</h4>
-	<h4>3 hour party</h4>
-	<h4>Private group & Private referee</h4>
+	<div class="wrap">
+		
+		<h1>Airsoft Birthday Parties</h1>
+		<p class="subtitle">For ages 12 & up</p>
 
-	<h3>Package #1: - Up to 10 players - $329 plux tax</h3>
+		<div class="infoBox">
+			<strong>3 Hour Party</strong> | Private group & Private referee
+		</div>
 
-	<p>Includes: Admission, rental gun, face masks, 15,000 BB's</p>
+		<div class="package">
+			<h3>Package #1: Up to 10 players - $329 plus tax</h3>
+			<p><strong>Includes:</strong> Admission, rental gun, face masks, and 15,000 BB's.</p>
+		</div>
 
-	<h3>Package #2: - 11-15 players - $399 plus tax</h3>
+		<div class="package">
+			<h3>Package #2: 11-15 players - $399 plus tax</h3>
+			<p><strong>Includes:</strong> Admission, rental gun, face masks, and 25,000 BB's.</p>
+		</div>
 
-	<p>Includes: Admission, rental gun, face mask, 25,000 BB's</p>
+		<p style="color: #d00000; font-weight: bold; text-align: center; margin-top: 30px;">
+			** Minimum age for airsoft is 12 years old **<br>
+			NO EXCEPTIONS
+		</p>
 
-	<p>** Minimum age for airsoft is 12 years old** <br> NO EXCEPTIONS</p>
+		<div class="warningBox">
+			Airsoft parties can't be played in rain or snow.
+		</div>
 
-	<h3>Book your airsoft birthday party online today!</h3>
+		<div class="btn-container">
+			<a href="Book.php" class="btn">Book Now!</a>
+		</div>
 
-	<p>Airsoft parties can't be played in rain or snow</p>
+	</div>
 
-	<a href="book.php">
-		<button type="submit" name="airsoft">Book Now!</button>
-	</a>
-
+	<footer>
+		<p>MSG Paintball | Paintball - Airsoft - Gel Ball</p>
+	</footer>
 
 </body>
 </html>

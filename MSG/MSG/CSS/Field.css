@@ -72,6 +72,7 @@ a {
   color: white;
 
 
+
 }
 
 button {
@@ -83,10 +84,15 @@ button {
   background-color: #d00000;
   color: white;
   cursor: pointer;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "Times New Roman";
 }
 
 .button {
+	padding: 50px;
 	text-align: center;
+	
 }
 
 .middle{
@@ -105,31 +111,42 @@ button {
 	max-width: 1200px;
 	margin: 50px auto;
 	margin: 0 auto;
+	box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 }
 .res h4{
 	font-size: 20px;
 }
 
-.res li{
+.res span{
 	border: none;
 	border-radius: 60px;
 	text-align: center;
 	transition: background-color 0.3s ease;
+	padding: 10px;
+	color: white;
+	display: inline-flex;
+	justify-content: center;
+	text-align: center;
+	align-content: center;
 }
 
-.res li:hover{
-	background-color: red;
+.res span:hover{
+	background-color: #d00000;
 }
 
 
 .res ul {
 	list-style-type: none;
 	text-align: center;
-	width: 50px;
+
 	
 }
 
 .res p {
+	display: flex;
+	justify-content: center;
 	text-align: center;
 	align-content: center;
+	width: auto;
 }
+

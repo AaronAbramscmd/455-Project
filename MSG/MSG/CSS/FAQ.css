@@ -1,0 +1,41 @@
+h1 {
+	text-align: center;
+}
+
+.txt {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	text-align: center;
+}
+
+body {
+	background-color: #0d0d0d;
+}
+
+p{
+	color: white;
+}
+
+h1 {
+	color: red;
+}
+
+strong {
+	font-size: 20px;
+	color: red;
+}
+.one {
+	margin: 20px;
+	border: solid 3px #222222;
+	border-radius: 60px;
+	background-color: #222222;
+	padding-top: 20px;
+}
+
+.two {
+	margin: 20px;
+	border: solid 3px #222222;
+	border-radius: 60px;
+	background-color: #222222;
+	padding-top: 20px;
+}

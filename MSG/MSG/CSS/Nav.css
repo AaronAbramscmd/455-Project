@@ -22,12 +22,14 @@ nav li {
 nav a {
 		text-decoration: none;
 		display: inline-block;
+		color: white;
 			
 	}
 
 
 a {
 	display: inline-block;
+	color: white;
 
 	}
 
@@ -37,7 +39,7 @@ a img {
 		max-width: 100%;
 	}
 
-	
+
 
 		
 	

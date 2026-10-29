@@ -11,12 +11,14 @@ nav ul {
 		nav li {
 			padding-right: 20px;
 			flex-shrink: 0;
+			color: white;
 
 		}
 
 		nav a {
 			text-decoration: none;
 			display: inline-block;
+			color: white;
 			
 		}
 
@@ -27,6 +29,7 @@ nav ul {
 
 		a {
 			display: inline-block;
+			color: white;
 
 		}
 
@@ -79,3 +82,5 @@ nav ul {
 	}
 	body {
 		background-color: #0d0d0d	}
+
+		

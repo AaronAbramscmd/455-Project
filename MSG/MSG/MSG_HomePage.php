@@ -1,7 +1,17 @@
 <?php
-
 session_start();
 
+if (isset($_POST['reminder_btn'])) {
+	if (isset($_SESSION['notify'])) {
+		unset($_SESSION['notify']);
+		unset($_SESSION['remind_game']);
+	} else {
+		$_SESSION['notify'] = true;
+		if (isset($_POST['game_select'])) {
+			$_SESSION['remind_game'] = $_POST['game_select'];
+		}
+	}
+}
 ?>
 
 <!DOCTYPE html>
@@ -10,8 +20,9 @@ session_start();
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Montgomery Sporting Goods & Paintball - Airsoft, Paintball</title>
-	<link rel="icon" type="Image/png" href="Image/Logo.gif">
-	<link rel="stylesheet" href="CSS/HomePage.css">
+	<link rel="icon" type="Image/png" href="Logo.gif">
+	<link rel="stylesheet" href="Nav.css">
+	<link rel="stylesheet" href="HomePage.css">
 
 	<style>
 	
@@ -67,7 +78,7 @@ session_start();
 
 				<li>
 					<a href="MSG_HomePage.php"> 
-						<img src="/Websites/MSG/Image/Logo2.gif" alt="logo" width="150" height="150">
+						<img src="Logo2.gif" alt="logo" width="150" height="150">
 					</a>
 				</li>
 
@@ -162,10 +173,45 @@ session_start();
 	<div class="Book"> 
 
 		<a href="Book.php">
-			<img src="Image/Book5.png" width="750" height="auto" alt="Book a party">
+			<img src="Book5.png" width="750" height="auto" alt="Book a party">
 		</a>
 
 	</div>
+
+	<?php if (isset($_SESSION['player_id'])) { ?>
+	
+	<div style="background-color: #222; border: 2px solid #b00000; width: 600px; margin: 0 auto; margin-bottom: 50px; padding: 20px; border-radius: 15px;">
+		<h3 style="color: #ff3333; padding: 0; margin-top: 0;">Notification Reminders</h3>
+		
+		<p style="font-size: 18px;">We will remind you about your booked date and time.</p>
+		
+		<form method="POST" action="MSG_HomePage.php">
+			<?php if (isset($_SESSION['notify'])) { ?>
+				
+				<p style="background-color: #111; padding: 10px; border-left: 4px solid #d00000; color: white;">
+					Reminders are ON for: <b><?php echo $_SESSION['remind_game']; ?></b>
+				</p>
+				
+				<p style="color: #ff3333; font-weight: bold; margin-top: 15px;">Notifcation reminders are ON! We will text you before the game.</p>
+				<button type="submit" name="reminder_btn" style="background-color: #444; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 10px;">Turn Off Reminders</button>
+				
+			<?php } else { ?>
+				
+				<label style="color: white; font-weight: bold; margin-bottom: 5px; display: block;">What do you want to be reminded about?</label>
+				<select name="game_select" style="width: 100%; padding: 8px; margin-bottom: 15px; background-color: #111; color: white; border: 1px solid #555; border-radius: 5px;">
+					<option value="Paintball Party">Paintball Party</option>
+					<option value="Airsoft Party">Airsoft Party</option>
+					<option value="Gell Ball Party">Gell Ball Party</option>
+				</select>
+
+				<p style="color: #888; font-weight: bold; margin-top: 15px;">Notifcation reminders are currently off.</p>
+				<button type="submit" name="reminder_btn" style="background-color: #d00000; color: white; padding: 10px 20px; border: none; border-radius: 5px; font-size: 16px; cursor: pointer; margin-top: 10px;">Turn On Reminders</button>
+				
+			<?php } ?>
+		</form>
+	</div>
+
+	<?php } ?>
 
 	<div class="sec2">
 
@@ -200,4 +246,3 @@ session_start();
 
 </body>
 </html>
-

@@ -53,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         try {
             $pdo->beginTransaction();
 
-            // First, create the reservation.
             $reservationSQL = "INSERT INTO reservations
                 (Player_ID, Status, Reserved_Date)
                 VALUES (?, 'Booked', ?)";
@@ -61,10 +60,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             $reservationStatement = $pdo->prepare($reservationSQL);
             $reservationStatement->execute([$playerID, $date]);
 
-            // Get the new Reservation_ID.
             $reservationID = $pdo->lastInsertId();
 
-            // Next, create the game connected to that reservation.
+
             $gameSQL = "INSERT INTO game
                 (Reservation_ID, Game_Type, `Date`, `Time`, Location, Capacity)
                 VALUES (?, ?, ?, ?, ?, 0)";
@@ -170,10 +168,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             </label>
 
             <select name="Time" id="Time" required>
-    <option value="10:00:00">10:00 am</option>
-    <option value="12:00:00">12:00 pm</option>
-    <option value="13:00:00">1:00 pm</option>
-    <option value="14:00:00">2:00 pm</option>
+        <option value="10:00:00">10:00 am</option>
+        <option value="12:00:00">12:00 pm</option>
+        <option value="13:00:00">1:00 pm</option>
+        <option value="14:00:00">2:00 pm</option>
             </select>
 
             <label for="Game_Type">

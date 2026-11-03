@@ -8,8 +8,109 @@ session_start();
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Airsoft Birthday Parties | MSG Paintball</title>
-	<link rel="icon" type="Image/png" href="Logo.gif">
-	<link rel="stylesheet" href="ABirthdayPage.css">
+	<link rel="icon" type="Image/png" href="Logo2.gif">
+	<!-- Using the exact same CSS files as the homepage -->
+	<link rel="stylesheet" href="Nav.css">
+	<link rel="stylesheet" href="HomePage.css">
+
+	<style>
+		.wrap {
+			max-width: 800px;
+			margin: 40px auto;
+			background-color: #222222;
+			padding: 30px;
+			border-radius: 8px;
+			border-top: 5px solid #d00000;
+			box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+		}
+
+		h1 {
+			text-align: center;
+			color: #d00000;
+			font-size: 36px;
+			margin-bottom: 5px;
+			padding: 0;
+		}
+
+		.subtitle {
+			text-align: center;
+			font-size: 20px;
+			font-weight: bold;
+			margin-top: 0;
+			margin-bottom: 30px;
+			border-bottom: 1px solid #333;
+			padding-bottom: 20px;
+		}
+
+		.infoBox {
+			background-color: #111;
+			border-left: 4px solid #d00000;
+			padding: 15px;
+			margin-bottom: 30px;
+			font-size: 18px;
+			text-align: center;
+			color: white;
+		}
+
+		.package {
+			background-color: #111;
+			padding: 20px;
+			margin-bottom: 20px;
+			border: 1px solid #333;
+			border-radius: 5px;
+		}
+
+		.package h3 {
+			color: #d00000;
+			margin-top: 0;
+			font-size: 22px;
+			text-align: left;
+		}
+
+		.package p {
+			color: #ccc;
+			margin-bottom: 0;
+		}
+
+		.warningBox {
+			background-color: #332200;
+			border-left: 4px solid #ffaa00;
+			padding: 15px;
+			margin-top: 30px;
+			color: #ffcc66;
+			font-weight: bold;
+			text-align: center;
+		}
+
+		.btn-container {
+			text-align: center;
+			margin-top: 40px;
+		}
+
+		.btn {
+			display: inline-block;
+			padding: 15px 40px;
+			background-color: #d00000;
+			color: white;
+			text-decoration: none;
+			border-radius: 5px;
+			font-weight: bold;
+			font-size: 20px;
+		}
+
+		.btn:hover {
+			background-color: #ff3333;
+		}
+
+		footer {
+			text-align: center;
+			padding: 20px;
+			background-color: #1b1b1b;
+			border-top: 3px solid #d00000;
+			margin-top: 40px;
+			color: #888;
+		}
+	</style>
 </head>
 <body>
 
@@ -18,7 +119,7 @@ session_start();
 			<ul>
 				<li> 
 					<a href="MSG_HomePage.php"> 
-						<img src="Logo.gif" alt="logo"> 
+						<img src="Logo2.gif" alt="logo"> 
 					</a> 
 				</li>
 				<li> <a href="MSG_HomePage.php">Home</a> </li>

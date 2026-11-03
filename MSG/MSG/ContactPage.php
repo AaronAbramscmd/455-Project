@@ -10,14 +10,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Contacts</title>
-	<link rel="stylesheet" href="CSS/Nav.css">
-	<style>
-		form{
-			display: grid;
-			place-items: center;
-		}
-		
-	</style>
+	<link rel="stylesheet" href="CSS/Contact.css">
+
 </head>
 <body>
 	<header>
@@ -42,24 +36,36 @@
 		</nav>
 	</header>
 
-	<form>
 
-		<label>Enter Name:</label><br>
-		<input type="text" name="name" placeholder="Enter your name"><br>
+<div class="contact-container">
 
-		<label>Email:</label><br>
-		<input type="Email" name="gmail" placeholder="Enter email address"><br>
+    <h1>Contact Us</h1>
 
-		<label>Subject:</label><br>
-		<input type="text" name="subject" placeholder="Enter text here"><br>
+    <h3>Have a question? Get in touch!</h3>
 
-		<label>Notes:</label><br>
-		<input type="text" name="notes" placeholder="Anything you would like to say?"><br>
+    <form>
 
-		<button type="submit" name="ContactPage">Submit </button>
+        <label for="name">Enter Name:</label>
+        <input type="text" id="name" name="name"
+               placeholder="Enter your name">
 
+        <label for="gmail">Email:</label>
+        <input type="email" id="gmail" name="gmail"
+               placeholder="Enter email address">
 
-	</form>
+        <label for="subject">Subject:</label>
+        <input type="text" id="subject" name="subject"
+               placeholder="Enter text here">
+
+        <label for="notes">Notes:</label>
+        <textarea id="notes" name="notes"
+                  placeholder="Anything you would like to say?"></textarea>
+
+        <button type="submit" name="ContactPage">Submit</button>
+
+    </form>
+
+</div>
 
 </body>
 </html>

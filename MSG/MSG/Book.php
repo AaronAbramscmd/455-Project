@@ -1,4 +1,6 @@
 <?php
+
+
 session_start();
 include 'db.php';
 
@@ -17,8 +19,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
     $date = $_POST['Date'] ?? '';
     $field = $_POST['Location'] ?? '';
 
-    $validTimes = ['10:00 am', '12:00 pm', '1:00 pm', '2:00 pm'];
-    $validParties = ['Paintball Party', 'Airsoft Party', 'Gel Party'];
+    $validTimes = [
+        '10:00:00',
+        '12:00:00',
+        '13:00:00',
+        '14:00:00'
+    ];
+
+    $validParties = [
+        'Paintball Party',
+        'Airsoft Party',
+        'Gel Party'
+    ];
+
     $validFields = [
         'King of the hill',
         'Castle',
@@ -38,27 +51,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
         $error = "Please enter valid booking information.";
     } else {
         try {
-            $sql = "INSERT INTO game
-                    (Player_ID, Game_Type, `Date`, `Time`, Location)
-                    VALUES (?, ?, ?, ?, ?)";
+            $pdo->beginTransaction();
 
-            $statement = $pdo->prepare($sql);
-            $statement->execute([
-                $playerID,
+            // First, create the reservation.
+            $reservationSQL = "INSERT INTO reservations
+                (Player_ID, Status, Reserved_Date)
+                VALUES (?, 'Booked', ?)";
+
+            $reservationStatement = $pdo->prepare($reservationSQL);
+            $reservationStatement->execute([$playerID, $date]);
+
+            // Get the new Reservation_ID.
+            $reservationID = $pdo->lastInsertId();
+
+            // Next, create the game connected to that reservation.
+            $gameSQL = "INSERT INTO game
+                (Reservation_ID, Game_Type, `Date`, `Time`, Location, Capacity)
+                VALUES (?, ?, ?, ?, ?, 0)";
+
+            $gameStatement = $pdo->prepare($gameSQL);
+            $gameStatement->execute([
+                $reservationID,
                 $partyType,
                 $date,
                 $time,
                 $field
             ]);
 
+            $pdo->commit();
+
             header("Location: thankyou.php");
             exit();
 
         } catch (PDOException $e) {
+            if ($pdo->inTransaction()) {
+                $pdo->rollBack();
+            }
+
             $error = "The booking could not be saved. Please check your database setup.";
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -136,11 +170,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit'])) {
             </label>
 
             <select name="Time" id="Time" required>
-                <option value="">Pick which time works best</option>
-                <option value="10:00 am">10:00 am</option>
-                <option value="12:00 pm">12:00 pm</option>
-                <option value="1:00 pm">1:00 pm</option>
-                <option value="2:00 pm">2:00 pm</option>
+    <option value="10:00:00">10:00 am</option>
+    <option value="12:00:00">12:00 pm</option>
+    <option value="13:00:00">1:00 pm</option>
+    <option value="14:00:00">2:00 pm</option>
             </select>
 
             <label for="Game_Type">

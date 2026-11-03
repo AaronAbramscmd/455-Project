@@ -1,4 +1,48 @@
 ```php
+<?php
+session_start();
+include 'db.php';
+
+$error = "";
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $username = trim($_POST['username'] ?? '');
+    $password = $_POST['password'] ?? '';
+
+    $sql = "SELECT Player_ID, Username, Password
+            FROM player
+            WHERE Username = ?";
+
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    if ($player = $result->fetch_assoc()) {
+
+        if (password_verify($password, $player['Password'])) {
+
+            session_regenerate_id(true);
+
+            $_SESSION['player_id'] = $player['Player_ID'];
+
+            header("Location: book.php");
+            exit();
+
+        } else {
+            $error = "Incorrect username or password.";
+        }
+
+    } else {
+        $error = "Incorrect username or password.";
+    }
+
+    $stmt->close();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -238,76 +282,32 @@
 
     <form action="MSG_Login.php" method="POST">
 
-        <label for="username">
-            Username
-        </label>
+    <label for="username">Username</label>
 
-        <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Enter your username"
-            required
-        >
+    <input
+        type="text"
+        id="username"
+        name="username"
+        placeholder="Enter your username"
+        required
+    >
 
+    <label for="password">Password</label>
 
-        <label for="first_name">
-            First Name
-        </label>
+    <input
+        type="password"
+        id="password"
+        name="password"
+        placeholder="Enter your password"
+        required
+    >
 
-        <input
-            type="text"
-            id="first_name"
-            name="first_name"
-            placeholder="Enter your first name"
-            required
-        >
+    <button type="submit">
+        Login
+    </button>
 
+</form>
 
-        <label for="last_name">
-            Last Name
-        </label>
-
-        <input
-            type="text"
-            id="last_name"
-            name="last_name"
-            placeholder="Enter your last name"
-            required
-        >
-
-
-        <label for="email">
-            Email
-        </label>
-
-        <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Enter your email"
-            required
-        >
-
-
-        <label for="password">
-            Password
-        </label>
-
-        <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            required
-        >
-
-
-        <button type="submit">
-            Login
-        </button>
-
-    </form>
 
 
     <p>
